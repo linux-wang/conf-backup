@@ -10,7 +10,7 @@ import sys
 
 def translate(url,word):
 	html=urllib2.urlopen(url+word)
-	print html.read()
+	print "result:"+html.read()
 
 
 def main():
