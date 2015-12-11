@@ -12,6 +12,12 @@ def translate(url,word):
 	html=urllib2.urlopen(url+word)
 #	print "result:"+html.read()
 	result=html.read()
+	
+	for i in result:
+		if i=="errorCode":
+			if 
+
+
 	print result
 
 def main():
