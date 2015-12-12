@@ -1,4 +1,4 @@
-#!/usr/lib/bin
+#!/usr/lib/bin 
 #Filename:youdao.py
 
 #coding="utf-8"
@@ -12,12 +12,9 @@ def translate(url,word):
 	html=urllib2.urlopen(url+word)
 #	print "result:"+html.read()
 	result=html.read()
-	
-	for i in result:
-		if i=="errorCode":
-			if 
-
-
+	print lens(result)	
+	for name,id in result.items():
+		print (name,id)
 	print result
 
 def main():
