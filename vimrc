@@ -18,4 +18,51 @@ set showmatch "使用括号时，显示相对应的括号
 set whichwrap=h,l,b,s,,[,] "设置hl可以换行用
 set encoding=utf-8
 set autowrite "编辑多个文件时，使用：e或：n切换文件时可以自动保存
+set cursorline "突出显示当前行
+set cursorcolumn "突出显示当前列
+set fenc=utf-8 "文件编码
+set nowrap "设置不折叠行
+set mouse=a "设置启用鼠标
 
+" F5执行Python
+" map <F5> :Autopep8<CR> :w<CR> :call RunPython()<CR>
+" function RunPython()
+"  let mp = &makeprg
+"  let ef = &errorformat
+"  let exeFile = expand("%:t")
+"  setlocal makeprg=python\ -u
+"  set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+"  silent make %
+"  copen
+"  let &makeprg = mp
+"  let &errorformat = ef
+" endfunction
+
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'kien/rainbow_parentheses.vim'
+call vundle#end()
+filetype plugin indent on
+
+
+" kien/rainbow_parentheses.vim
+let g:rbpt_colorpairs = [ ['brown', 'RoyalBlue3'], ['Darkblue', 'SeaGreen3'], ['darkgray', 'DarkOrchid3'], ['darkgreen', 'firebrick3'],['darkcyan', 'RoyalBlue3'],['darkred', 'SeaGreen3'],['darkmagenta', 'DarkOrchid3'],['brown', 'firebrick3'],['gray', 'RoyalBlue3'],['black',       'SeaGreen3'],['darkmagenta', 'DarkOrchid3'],['Darkblue',  'firebrick3'],['darkgreen', 'RoyalBlue3'],['darkcyan', 'SeaGreen3'],['darkred', 'DarkOrchid3'],['red', 'firebrick3']]
+let g:rbpt_max = 16
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" auto add utf-8 in python files
+function HeaderPython() 
+" call setline(1, "#!/usr/bin/env python") 
+call setline(1, "# -*- coding:utf-8 -*-")
+" call append(1, "# -*- coding: utf-8 -*-") 
+normal G 
+normal o 
+normal o 
+endf 
+autocmd bufnewfile *.py call HeaderPython() 
